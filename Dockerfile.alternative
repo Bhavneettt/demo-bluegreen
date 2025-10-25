@@ -1,0 +1,19 @@
+FROM node:20-alpine
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package*.json ./
+
+# Install dependencies with retry and timeout settings
+RUN npm config set registry https://registry.npmmirror.com && \
+    npm install --timeout=300000 --retry=3
+
+# Copy application code
+COPY app/ ./app/
+
+# Set environment variables
+ENV PORT=3000
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "app/server.js"]
