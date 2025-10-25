@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: REPLACEME_IMAGE
+          image: demo-bluegreen:test
           ports: [{ containerPort: 3000 }]
           env:
             - name: COLOR
