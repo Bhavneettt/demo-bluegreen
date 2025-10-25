@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-blue
+  namespace: demo
+  labels: { app: demo, version: blue }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: demo, version: blue }
+  template:
+    metadata:
+      labels: { app: demo, version: blue }
+    spec:
+      containers:
+        - name: app
+          image: REPLACEME_IMAGE
+          ports: [{ containerPort: 3000 }]
+          env:
+            - name: COLOR
+              value: "blue"
+          readinessProbe:
+            httpGet: { path: /health, port: 3000 }
+            initialDelaySeconds: 2
+            periodSeconds: 2

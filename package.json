@@ -1,0 +1,16 @@
+{
+  "name": "demo-bluegreen",
+  "version": "1.0.0",
+  "description": "Blue-Green Deployment Demo",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "node app/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["blue-green", "deployment", "kubernetes", "jenkins"],
+  "author": "",
+  "license": "ISC"
+}
