@@ -20,8 +20,8 @@ pipeline {
           env.IMAGE_TAG = "${newColor}-${env.BUILD_NUMBER}"
           sh """
             docker login -u "$REGISTRY_USR" -p "$REGISTRY_PSW"
-            docker build -t ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .
-            docker push ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}
+            docker build -t bhavneettt/${IMAGE_NAME}:${IMAGE_TAG} .
+            docker push bhavneettt/${IMAGE_NAME}:${IMAGE_TAG}
           """
         }
       }
@@ -31,7 +31,7 @@ pipeline {
         script {
           def dep = "demo-${env.NEW_COLOR}"
           sh "kubectl -n ${K8S_NAMESPACE} apply -f k8s/deploy-${env.NEW_COLOR}.yaml"
-          sh "kubectl -n ${K8S_NAMESPACE} set image deployment/${dep} app=${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+          sh "kubectl -n ${K8S_NAMESPACE} set image deployment/${dep} app=bhavneettt/${IMAGE_NAME}:${IMAGE_TAG}"
           sh "kubectl -n ${K8S_NAMESPACE} rollout status deployment/${dep} --timeout=90s"
         }
       }
